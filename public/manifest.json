@@ -1,0 +1,9 @@
+{
+  "short_name": "React Assessment",
+  "name": "Take-Home React Assessment",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
