@@ -1,6 +1,18 @@
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const savedLogin = localStorage.getItem("login") || "";
+
+  const [login, setLogin] = useState(savedLogin);
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("login", login);
+    window.location.reload();
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -9,14 +21,31 @@ function App() {
       </header>
 
       <main className="app-main">
-        {/*
-          TODO: Задание 3
-          Здесь нужно создать форму логина.
-          Подробности — в README.md
-        */}
         <section className="login-section">
           <h2>Форма входа</h2>
-          <p>Замени этот текст на форму (см. Задание 3 в README.md)</p>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="login">Login</label>
+            <input
+              type="text"
+              required
+              id="login"
+              name="login"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+              placeholder="Введите логин"
+            />
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              required
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Введите пароль"
+            />
+            <button type="submit">Войти</button>
+          </form>
         </section>
       </main>
 
