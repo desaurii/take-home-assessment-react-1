@@ -1,0 +1,14 @@
+.header {
+  background-color: #282c34;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+.header h1 {
+  margin: 0 0 0.5rem;
+}
+
+.header p {
+  margin: 0;
+  opacity: 0.8;
+}
