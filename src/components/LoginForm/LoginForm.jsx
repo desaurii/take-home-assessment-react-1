@@ -15,10 +15,13 @@ function LoginForm() {
 
   return (
     <section className={styles.loginSection}>
-      <h2>Форма входа</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="login">Login</label>
+      <h2 className={styles.title}>Форма входа</h2>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.label} htmlFor="login">
+          Login
+        </label>
         <input
+          className={styles.input}
           type="text"
           required
           id="login"
@@ -27,8 +30,11 @@ function LoginForm() {
           onChange={(e) => setLogin(e.target.value)}
           placeholder="Введите логин"
         />
-        <label htmlFor="password">Password</label>
+        <label className={styles.label} htmlFor="password">
+          Password
+        </label>
         <input
+          className={styles.input}
           type="password"
           required
           id="password"
@@ -37,7 +43,9 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Введите пароль"
         />
-        <button type="submit">Войти</button>
+        <button className={styles.submitButton} type="submit">
+          Войти
+        </button>
       </form>
     </section>
   );

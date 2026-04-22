@@ -4,11 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
-.header h1 {
+.title {
   margin: 0 0 0.5rem;
 }
 
-.header p {
+.description {
   margin: 0;
   opacity: 0.8;
 }
