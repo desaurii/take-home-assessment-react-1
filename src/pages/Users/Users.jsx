@@ -7,25 +7,26 @@ function Users() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchUsers = async () => {
-    setIsLoading(true);
-
-    try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-
-      if (!res.ok) throw new Error("Ошибка запроса");
-
-      const data = await res.json();
-      setUsers(data);
-      setError(null);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchUsers = async () => {
+      setIsLoading(true);
+
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!res.ok) throw new Error("Unable to load users");
+
+        const data = await res.json();
+        setUsers(data);
+        setError(null);
+      } catch (err) {
+        console.error(err);
+        setError("Unable to load users");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchUsers();
   }, []);
 
