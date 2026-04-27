@@ -1,9 +1,11 @@
 import styles from "./LoginForm.module.css";
 
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const savedLogin = localStorage.getItem("login") || "";
+  const navigate = useNavigate();
 
   const {
     register,
@@ -18,7 +20,7 @@ function LoginForm() {
 
   const onSubmit = (data) => {
     localStorage.setItem("login", data.login);
-    window.location.reload();
+    navigate("/users", { replace: true });
   };
 
   return (
