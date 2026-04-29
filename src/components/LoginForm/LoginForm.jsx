@@ -2,6 +2,7 @@ import styles from "./LoginForm.module.css";
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function LoginForm() {
   const savedLogin = localStorage.getItem("login") || "";
@@ -18,9 +19,35 @@ function LoginForm() {
     },
   });
 
-  const onSubmit = (data) => {
-    localStorage.setItem("login", data.login);
-    navigate("/users", { replace: true });
+  const [apiError, setApiError] = useState("");
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+          expiresInMins: 30,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.message || "Request failed");
+
+      localStorage.setItem("token", result.accessToken);
+
+      navigate("/users", { replace: true });
+    } catch (err) {
+      setApiError(err.message);
+      console.log(err.message);
+    }
   };
 
   return (
@@ -64,6 +91,7 @@ function LoginForm() {
         {errors.password && (
           <p className={styles.error}>{errors.password.message}</p>
         )}
+        {apiError && <p className={styles.apiError}>{apiError}</p>}
 
         <button className={styles.submitButton} type="submit">
           Войти
