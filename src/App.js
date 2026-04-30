@@ -8,6 +8,7 @@ import Main from "./components/Main/Main";
 import Users from "./pages/Users/Users";
 import AnonymousRoute from "./routes/AnonymousRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import Spinner from "./components/Spinner/Spinner";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -17,9 +18,16 @@ function App() {
       try {
         const token = localStorage.getItem("token");
 
-        if (!token) return;
+        if (!token) {
+          setLoading(false);
+          return;
+        }
 
-        const res = await fetch("https://dummyjson.com/auth/me");
+        const res = await fetch("https://dummyjson.com/auth/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!res.ok) {
           localStorage.removeItem("token");
@@ -37,6 +45,13 @@ function App() {
     checkAuth();
   }, []);
 
+ if (loading) {
+   return (
+     <div className="loaderWrapper">
+       <Spinner />
+     </div>
+   );
+ }
   return (
     <BrowserRouter basename="/take-home-assessment-react-1">
       <div className="app">

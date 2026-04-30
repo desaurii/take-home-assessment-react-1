@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function LoginForm() {
-  const savedLogin = localStorage.getItem("login") || "";
+  const savedLogin = localStorage.getItem("username") || "";
   const navigate = useNavigate();
 
   const {
@@ -14,7 +14,7 @@ function LoginForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      login: savedLogin,
+      username: savedLogin,
       password: "",
     },
   });
@@ -54,15 +54,15 @@ function LoginForm() {
     <section className={styles.loginSection}>
       <h2 className={styles.title}>Форма входа</h2>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <label className={styles.label} htmlFor="login">
+        <label className={styles.label} htmlFor="username">
           Login
         </label>
         <input
           className={styles.input}
           type="text"
-          id="login"
+          id="username"
           placeholder="Введите логин"
-          {...register("login", {
+          {...register("username", {
             required: "Логин обязателен",
             minLength: {
               value: 3,
@@ -70,7 +70,9 @@ function LoginForm() {
             },
           })}
         />
-        {errors.login && <p className={styles.error}>{errors.login.message}</p>}
+        {errors.username && (
+          <p className={styles.error}>{errors.username.message}</p>
+        )}
 
         <label className={styles.label} htmlFor="password">
           Password

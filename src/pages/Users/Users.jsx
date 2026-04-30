@@ -1,6 +1,7 @@
 import styles from "./Users.module.css";
 import UserCard from "../../components/UserCard/UserCard";
 import { useState, useEffect } from "react";
+import Spinner from "../../components/Spinner/Spinner";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -34,7 +35,7 @@ function Users() {
     <div className={styles.usersList}>
       {isLoading && (
         <div className={styles.center}>
-          <p className={styles.loading}>Loading...</p>
+          <Spinner />
         </div>
       )}
 
