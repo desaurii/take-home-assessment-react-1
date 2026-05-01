@@ -3,6 +3,11 @@
   color: white;
   padding: 2rem;
   text-align: center;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
 }
 .title {
   margin: 0 0 0.5rem;
@@ -11,4 +16,16 @@
 .description {
   margin: 0;
   opacity: 0.8;
+}
+.logoutButton {
+  width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #dbd5d5;
+  color: rgb(0, 0, 0);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.logoutButton:hover {
+  background-color: rgba(124, 123, 123, 0.898);
 }

@@ -2,11 +2,14 @@ import styles from "./LoginForm.module.css";
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { AuthContext } from "../../context/AuthContext";
 
 function LoginForm() {
   const savedLogin = localStorage.getItem("username") || "";
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const {
     register,
@@ -22,6 +25,8 @@ function LoginForm() {
   const [apiError, setApiError] = useState("");
 
   const onSubmit = async (data) => {
+    localStorage.setItem("username", data.username);
+    setApiError("");
     try {
       const res = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
@@ -41,7 +46,7 @@ function LoginForm() {
 
       if (!res.ok) throw new Error(result.message || "Request failed");
 
-      localStorage.setItem("token", result.accessToken);
+      login(result, result.accessToken);
 
       navigate("/users", { replace: true });
     } catch (err) {

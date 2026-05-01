@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -10,48 +10,18 @@ import AnonymousRoute from "./routes/AnonymousRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Spinner from "./components/Spinner/Spinner";
 
+import { AuthContext } from "./context/AuthContext";
+
 function App() {
-  const [loading, setLoading] = useState(true);
+  const { loading } = useContext(AuthContext);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          setLoading(false);
-          return;
-        }
-
-        const res = await fetch("https://dummyjson.com/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!res.ok) {
-          localStorage.removeItem("token");
-          return;
-        }
-
-        const user = await res.json();
-      } catch (err) {
-        console.log(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
- if (loading) {
-   return (
-     <div className="loaderWrapper">
-       <Spinner />
-     </div>
-   );
- }
+  if (loading) {
+    return (
+      <div className="loaderWrapper">
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <BrowserRouter basename="/take-home-assessment-react-1">
       <div className="app">
