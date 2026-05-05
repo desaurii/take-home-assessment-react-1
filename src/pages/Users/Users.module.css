@@ -10,12 +10,7 @@
   display: flex;
   justify-content: center;
 }
-.loading {
-  text-align: center;
-  padding: 20px;
-  font-size: 18px;
-  color: #666;
-}
+
 .error {
   max-width: 400px;
   margin: 20px auto;
