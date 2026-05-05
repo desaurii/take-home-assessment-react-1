@@ -98,7 +98,7 @@ function LoginForm() {
         {errors.password && (
           <p className={styles.error}>{errors.password.message}</p>
         )}
-        {apiError && <p className={styles.apiError}>{apiError}</p>}
+        {apiError && <p className={styles.error}>{apiError}</p>}
 
         <button className={styles.submitButton} type="submit">
           Войти

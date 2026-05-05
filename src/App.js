@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 
 import "./App.css";
@@ -15,27 +15,28 @@ import { AuthContext } from "./context/AuthContext";
 function App() {
   const { loading } = useContext(AuthContext);
 
-  if (loading) {
-    return (
-      <div className="loaderWrapper">
-        <Spinner />
-      </div>
-    );
-  }
   return (
     <BrowserRouter basename="/take-home-assessment-react-1">
       <div className="app">
         <Header />
 
         <main className="content">
-          <Routes>
-            <Route element={<AnonymousRoute />}>
-              <Route path="/" element={<Main />} />
-            </Route>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/users" element={<Users />} />
-            </Route>
-          </Routes>
+          {loading ? (
+            <div className="loaderWrapper">
+              <Spinner />
+            </div>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Navigate to="/login" />} />
+
+              <Route element={<AnonymousRoute />}>
+                <Route path="/login" element={<Main />} />
+              </Route>
+              <Route element={<ProtectedRoute />}>
+                <Route path="/users" element={<Users />} />
+              </Route>
+            </Routes>
+          )}
         </main>
 
         <Footer />

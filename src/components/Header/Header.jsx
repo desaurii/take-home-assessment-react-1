@@ -6,12 +6,11 @@ import { AuthContext } from "../../context/AuthContext";
 
 function Header() {
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
-  const { isAuth } = useContext(AuthContext);
+  const { logout, isAuth } = useContext(AuthContext);
   const handleLogout = () => {
-  logout();
-  navigate("/");
-};
+    logout();
+    navigate("/login");
+  };
 
   return (
     <header className={styles.header}>
@@ -20,10 +19,11 @@ function Header() {
         Добро пожаловать! Начни выполнять задания из README.md
       </p>
 
-      {isAuth && 
-      <button className={styles.logoutButton} onClick={handleLogout}>
-        Выйти
-      </button>}
+      {isAuth && (
+        <button className={styles.logoutButton} onClick={handleLogout}>
+          Выйти
+        </button>
+      )}
     </header>
   );
 }
