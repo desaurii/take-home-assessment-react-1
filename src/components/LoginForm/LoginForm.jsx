@@ -38,7 +38,7 @@ function LoginForm() {
         body: JSON.stringify({
           username: data.username,
           password: data.password,
-          expiresInMins: 30,
+          expiresInMins: 1,
         }),
       });
 
@@ -46,7 +46,7 @@ function LoginForm() {
 
       if (!res.ok) throw new Error(result.message || "Request failed");
 
-      login(result, result.accessToken);
+      login(result, result.accessToken, result.refreshToken);
 
       navigate("/users", { replace: true });
     } catch (err) {
