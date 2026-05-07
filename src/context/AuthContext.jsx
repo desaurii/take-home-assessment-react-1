@@ -1,17 +1,19 @@
 import { createContext, useEffect, useState } from "react";
-
+import { api } from "../api/api";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
+  const login = (userData, accessToken, refreshToken) => {
+    localStorage.setItem("token", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
     setUser(userData);
   };
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
     setUser(null);
   };
   const isAuth = !!user;
@@ -27,23 +29,13 @@ export const AuthProvider = ({ children }) => {
           return;
         }
 
-        const res = await fetch("https://dummyjson.com/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await api.get("/auth/me");
 
-        if (!res.ok) {
-          localStorage.removeItem("token");
-          setUser(null);
-          setLoading(false);
-          return;
-        }
-
-        const user = await res.json();
-        setUser(user);
+        setUser(res.data);
       } catch (err) {
-        console.log(err.message);
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        setUser(null);
       } finally {
         setLoading(false);
       }
