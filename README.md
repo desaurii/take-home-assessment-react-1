@@ -301,4 +301,34 @@ take-home-assessment-react-1/
 
 ---
 
+## Линтинг и форматирование 
+
+В проекте настроены ESLint и Prettier для поддержания единого стиля кода и поиска ошибок. 
+
+### Проверка ESLint
+
+```bash
+npm run lint
+```
+
+### Автофикс ESLint
+
+```bash
+npm run lint:fix
+```
+
+### Форматирование кода (Prettier)
+
+```bash
+npm run format
+```
+
+### Проверка форматирования
+
+```bash
+npm run format:check
+```
+
+---
+
 Удачи! Если что-то непонятно — спрашивай.
