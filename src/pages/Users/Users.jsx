@@ -1,7 +1,7 @@
-import styles from "./Users.module.css";
-import UserCard from "../../components/UserCard/UserCard";
-import { useState, useEffect } from "react";
-import Spinner from "../../components/Spinner/Spinner";
+import styles from './Users.module.css';
+import UserCard from '../../components/UserCard/UserCard';
+import { useState, useEffect } from 'react';
+import Spinner from '../../components/Spinner/Spinner';
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -13,16 +13,16 @@ function Users() {
       setIsLoading(true);
 
       try {
-        const res = await fetch("https://jsonplaceholder.typicode.com/users");
+        const res = await fetch('https://jsonplaceholder.typicode.com/users');
 
-        if (!res.ok) throw new Error("Unable to load users");
+        if (!res.ok) throw new Error('Unable to load users');
 
         const data = await res.json();
         setUsers(data);
         setError(null);
       } catch (err) {
         console.error(err);
-        setError("Unable to load users");
+        setError('Unable to load users');
       } finally {
         setIsLoading(false);
       }

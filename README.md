@@ -159,16 +159,16 @@ HTML-формы (`<form>`) — основной способ сбора данн
 
 ```jsx
 // Чтение из localStorage при загрузке:
-const savedLogin = localStorage.getItem("login") || "";
+const savedLogin = localStorage.getItem('login') || '';
 
 // useState для хранения значений полей:
 const [login, setLogin] = useState(savedLogin);
-const [password, setPassword] = useState("");
+const [password, setPassword] = useState('');
 
 // Обработчик отправки формы:
 const handleSubmit = (e) => {
   e.preventDefault(); // предотвращаем стандартное поведение формы
-  localStorage.setItem("login", login);
+  localStorage.setItem('login', login);
   window.location.reload();
 };
 ```

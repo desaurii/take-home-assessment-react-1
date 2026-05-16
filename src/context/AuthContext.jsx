@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import { api } from "../api/api";
+import { createContext, useEffect, useState } from 'react';
+import { api } from '../api/api';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -7,13 +7,13 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const login = (userData, accessToken, refreshToken) => {
-    localStorage.setItem("token", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem('token', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
     setUser(userData);
   };
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     setUser(null);
   };
   const isAuth = !!user;
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
 
         if (!token) {
           setLoading(false);
@@ -29,12 +29,12 @@ export const AuthProvider = ({ children }) => {
           return;
         }
 
-        const res = await api.get("/auth/me");
+        const res = await api.get('/auth/me');
 
         setUser(res.data);
       } catch (err) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken");
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         setUser(null);
       } finally {
         setLoading(false);

@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 let isRefreshing = false;
 let failedQueue = [];
 
 export const api = axios.create({
-  baseURL: "https://dummyjson.com",
+  baseURL: 'https://dummyjson.com',
 });
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -32,16 +32,16 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = localStorage.getItem('refreshToken');
 
-        const res = await axios.post("https://dummyjson.com/auth/refresh", {
+        const res = await axios.post('https://dummyjson.com/auth/refresh', {
           refreshToken,
           expiresInMins: 1,
         });
 
         const newAccessToken = res.data.accessToken;
 
-        localStorage.setItem("token", newAccessToken);
+        localStorage.setItem('token', newAccessToken);
 
         failedQueue.forEach((prom) => {
           prom.resolve(newAccessToken);
@@ -61,8 +61,8 @@ api.interceptors.response.use(
         failedQueue = [];
         isRefreshing = false;
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken");
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
 
         return Promise.reject(refreshError);
       }

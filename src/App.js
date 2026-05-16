@@ -1,16 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
 
-import "./App.css";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import Main from "./components/Main/Main";
-import Users from "./pages/Users/Users";
-import AnonymousRoute from "./routes/AnonymousRoute";
-import ProtectedRoute from "./routes/ProtectedRoute";
-import Spinner from "./components/Spinner/Spinner";
-
-import { AuthContext } from "./context/AuthContext";
+import './App.css';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Main from './components/Main/Main';
+import Users from './pages/Users/Users';
+import AnonymousRoute from './routes/AnonymousRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
+import Spinner from './components/Spinner/Spinner';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
   const { loading } = useContext(AuthContext);
