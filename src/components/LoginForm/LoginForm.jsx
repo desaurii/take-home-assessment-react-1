@@ -1,13 +1,13 @@
-import styles from "./LoginForm.module.css";
+import styles from './LoginForm.module.css';
 
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from '../../context/AuthContext';
 
 function LoginForm() {
-  const savedLogin = localStorage.getItem("username") || "";
+  const savedLogin = localStorage.getItem('username') || '';
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -18,21 +18,21 @@ function LoginForm() {
   } = useForm({
     defaultValues: {
       username: savedLogin,
-      password: "",
+      password: '',
     },
   });
 
-  const [apiError, setApiError] = useState("");
+  const [apiError, setApiError] = useState('');
 
   const onSubmit = async (data) => {
-    localStorage.setItem("username", data.username);
-    setApiError("");
+    localStorage.setItem('username', data.username);
+    setApiError('');
     try {
-      const res = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
+      const res = await fetch('https://dummyjson.com/auth/login', {
+        method: 'POST',
 
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
 
         body: JSON.stringify({
@@ -44,11 +44,11 @@ function LoginForm() {
 
       const result = await res.json();
 
-      if (!res.ok) throw new Error(result.message || "Request failed");
+      if (!res.ok) throw new Error(result.message || 'Request failed');
 
       login(result, result.accessToken, result.refreshToken);
 
-      navigate("/users", { replace: true });
+      navigate('/users', { replace: true });
     } catch (err) {
       setApiError(err.message);
       console.log(err.message);
@@ -67,11 +67,11 @@ function LoginForm() {
           type="text"
           id="username"
           placeholder="Введите логин"
-          {...register("username", {
-            required: "Логин обязателен",
+          {...register('username', {
+            required: 'Логин обязателен',
             minLength: {
               value: 3,
-              message: "Минимум 3 символа",
+              message: 'Минимум 3 символа',
             },
           })}
         />
@@ -87,11 +87,11 @@ function LoginForm() {
           type="password"
           id="password"
           placeholder="Введите пароль"
-          {...register("password", {
-            required: "Пароль обязателен",
+          {...register('password', {
+            required: 'Пароль обязателен',
             minLength: {
               value: 6,
-              message: "Минимум 6 символов",
+              message: 'Минимум 6 символов',
             },
           })}
         />

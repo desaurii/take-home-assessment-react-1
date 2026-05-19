@@ -159,16 +159,16 @@ HTML-формы (`<form>`) — основной способ сбора данн
 
 ```jsx
 // Чтение из localStorage при загрузке:
-const savedLogin = localStorage.getItem("login") || "";
+const savedLogin = localStorage.getItem('login') || '';
 
 // useState для хранения значений полей:
 const [login, setLogin] = useState(savedLogin);
-const [password, setPassword] = useState("");
+const [password, setPassword] = useState('');
 
 // Обработчик отправки формы:
 const handleSubmit = (e) => {
   e.preventDefault(); // предотвращаем стандартное поведение формы
-  localStorage.setItem("login", login);
+  localStorage.setItem('login', login);
   window.location.reload();
 };
 ```
@@ -297,6 +297,36 @@ take-home-assessment-react-1/
 ├── package.json
 ├── .gitignore
 └── README.md               ← этот файл
+```
+
+---
+
+## Линтинг и форматирование 
+
+В проекте настроены ESLint и Prettier для поддержания единого стиля кода и поиска ошибок. 
+
+### Проверка ESLint
+
+```bash
+npm run lint
+```
+
+### Автофикс ESLint
+
+```bash
+npm run lint:fix
+```
+
+### Форматирование кода (Prettier)
+
+```bash
+npm run format
+```
+
+### Проверка форматирования
+
+```bash
+npm run format:check
 ```
 
 ---

@@ -1,5 +1,5 @@
-import styles from "./Main.module.css";
-import LoginForm from "../LoginForm/LoginForm";
+import styles from './Main.module.css';
+import LoginForm from '../LoginForm/LoginForm';
 
 function Main() {
   return (
